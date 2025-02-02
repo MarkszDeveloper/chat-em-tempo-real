@@ -1,0 +1,47 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "main": "test/src/soma.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-jest": "jest",
+    "run-server": "nodemon test/src/somaTest.js",
+    "tsc --init": "tsc --init",
+    "tsc": "tsc",
+    "ts-node": "ts-node api-typescript/backend/src/server.ts",
+    "tsx-node": "tsx watch server-sockets/src/server.ts",
+    "dev": "nodemon --watch 'api-typescript/backend/src/' --exec ts-node api-typescript/backend/src/server.ts",
+    "json": "json-server --watch ./teste.json --port 3000"
+  },
+  "keywords": [],
+  "author": "Marksz_",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "Package com fins de estudo de diversas tecnologias",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^15.14.0",
+    "jest": "^29.7.0",
+    "json-server": "^1.0.0-beta.3",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "socket.io": "^4.8.1",
+    "sucrase": "^3.35.0",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
