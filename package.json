@@ -12,7 +12,7 @@
     "tsc --init": "tsc --init",
     "tsc": "tsc",
     "ts-node": "ts-node api-typescript/backend/src/server.ts",
-    "tsx-node": "tsx watch server-sockets/src/server.ts",
+    "tsx-node": "tsx watch server-sockets/src/server2.ts",
     "dev": "nodemon --watch 'api-typescript/backend/src/' --exec ts-node api-typescript/backend/src/server.ts",
     "json": "json-server --watch ./teste.json --port 3000"
   },
@@ -24,7 +24,9 @@
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^22.13.0",
+    "@types/socket.io": "^3.0.1",
     "dotenv": "^16.4.7",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
@@ -42,6 +44,7 @@
     "typescript-eslint": "^8.22.0"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
   }
 }
