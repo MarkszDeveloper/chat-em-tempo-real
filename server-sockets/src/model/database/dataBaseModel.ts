@@ -1,14 +1,15 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface IUser extends Document {
-    name: string,
+    idUser: string,
     message: string,
 }
+
 const newSchemma = new Schema<IUser>({
-    name: {
+    idUser: {
         type: String, 
         required: true,
-        default: "Unknown"
+        default: "Unknown user"
     },
     message: {
         type: String,
@@ -16,4 +17,6 @@ const newSchemma = new Schema<IUser>({
     },
 }, {timestamps: true});
 
-export const newModel = mongoose.model("Chat 1", newSchemma);
+const newModel = mongoose.model("Chat 1", newSchemma);
+
+export default newModel;
