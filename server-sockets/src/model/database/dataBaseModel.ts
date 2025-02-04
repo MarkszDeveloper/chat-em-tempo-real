@@ -1,11 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface IUser extends Document {
+export interface IUser extends Document {
     idUser: string,
     message: string,
 }
 
-const newSchemma = new Schema<IUser>({
+export const newSchemma = new Schema<IUser>({
     idUser: {
         type: String, 
         required: true,
