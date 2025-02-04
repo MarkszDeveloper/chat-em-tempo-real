@@ -9,6 +9,7 @@
             margin: 0; 
             padding-bottom: 3rem; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: black;
         }
   
         #form { 
@@ -51,9 +52,10 @@
         #messages > li { 
             padding: 0.5rem 1rem; 
             border-bottom: 0.1rem dotted black;
+            background: rgb(190, 189, 189);
         }
         #messages > li:nth-child(odd) { 
-            background: #efefef; 
+            background: #948e8e; 
         }
         #messages > li > span {
             text-transform: capitalize;
@@ -78,6 +80,16 @@
             if(input.value) {
                 socket.emit("message", input.value);
                 input.value = '';
+            }
+        })
+
+        socket.on("temp", (oldMessages) => {
+            for(oldMessage of oldMessages) {
+                const newLi = document.createElement("li");
+                const spanLi = document.createElement("span");
+                spanLi.innerHTML = oldMessage.message;
+                newLi.appendChild(spanLi);
+                ulMessages.appendChild(newLi);
             }
         })
 

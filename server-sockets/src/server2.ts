@@ -1,7 +1,7 @@
 import http from "http";
 import express, { Application } from "express";
 import { Server } from "socket.io"; 
-import helmet from "helmet";
+import { ServerService } from "./services/serverServices";
 
 export class Server2 {
     private io: Server;
@@ -10,7 +10,6 @@ export class Server2 {
     constructor() {
         this.app = express();
         // Protegendo o servidor utilizado o NPM do helmet.js
-        this.app.use(helmet());
         this.http = http.createServer(this.app);
         // Criando o servidor sockets para permitir a comunicação 
         this.io = new Server(this.http);
@@ -26,13 +25,17 @@ export class Server2 {
     }
     // Comunicação entre os sockets do servidor e do usuário/interface
     listenSockets() {
-        this.io.on("connection", (socket) => {
+        this.io.on("connection", async (socket) => {
             console.log("Connext user:", socket.id);
-
-            socket.on("message", (msg) => {
-                const data = `<b> User (id: ${socket.id} - ${Date.now()}):</b> `;
-                console.log(data + ` msg: ${msg}`);
-                this.io.emit("message", data, msg);
+            const oldMessages = await ServerService.findMessages();
+            console.log(oldMessages);
+            this.io.emit("temp", oldMessages)
+            socket.on("message", async (msg) => {
+                const dataId: string = `<b> User (id: ${socket.id} - ${Date.now()}):</b> `;
+                const completeData: string = dataId + ` msg: ${msg}`;
+                console.log(completeData);
+                await ServerService.postMessages(completeData);
+                this.io.emit("message", dataId, msg);
             });
         })
     }

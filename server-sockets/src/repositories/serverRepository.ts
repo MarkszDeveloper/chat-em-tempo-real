@@ -1,41 +1,39 @@
-import newModel, { IUser } from "../model/database/dataBaseModel";
+import dbModel, { IUser } from "../model/database/dataBaseModel";
 import ServerModel from "../model/serverModel";
 
 export default class ServerRepository {
-    private db;
-    
-    constructor() {this.db = newModel}
+    constructor() {}
 
-    findAll() {
-        this.db.find()
+    static async findAll() {
+        return await dbModel.find()
             .catch((error) => {
                 console.log("Ocorreu um erro ao buscar as mensagens no banco de dados:", error);
             });
     }
 
-    postMessage(data: IUser) {
+    static async postMessage(data: string) {
         ServerModel.validateObjectForDatabase(data);
-        this.db.create(data)
+        dbModel.create({message: data})
             .catch((error) => {
                 console.log("Ocorreu um erro ao adicionar a mensagem no banco de dados:", error)
             });
     }
 
-    updateMessage(data: IUser) {
+    static async updateMessage(data: IUser) {
         ServerModel.validateObjectForDatabase(data);
-        this.db.findByIdAndUpdate(data.idUser, {message: data.message}, {new: true})
+        return dbModel.findByIdAndUpdate(data.idUser, {message: data.message}, {new: true})
             .catch((error) => {
                 console.log("Ocorreu um erro ao atualizar a mensagem no banco de dados:", error)
             });
     }
 
-    deleteMessage(data: IUser) {
+    static async deleteMessage(data: IUser) {
         ServerModel.validateObjectForDatabase(data);
-        this.db.findByIdAndDelete(data.idUser)
+        dbModel.findByIdAndDelete(data.idUser)
             .catch((error) => {
                 console.log("Ocorreu um erro ao deletar a mensagem no banco de dados:", error)
             });
     }
-    // Não serão adicionados rotas PATCH pois não haverá motivo de utilizá-las neste chat (decisões escolhidas por mim)
-
 }
+
+// Não serão adicionados rotas PATCH pois não haverá motivo de utilizá-las neste chat (decisões escolhidas por mim)

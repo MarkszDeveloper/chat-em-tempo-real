@@ -1,11 +1,12 @@
 import mongoose, { Schema, Document } from "mongoose";
+import DatabaseModel from "../../config/database/databaseConfig";
 
 export interface IUser extends Document {
     idUser: string,
     message: string,
 }
 
-export const newSchemma = new Schema<IUser>({
+export const dbSchemma = new Schema<IUser>({
     idUser: {
         type: String, 
         required: true,
@@ -17,6 +18,9 @@ export const newSchemma = new Schema<IUser>({
     },
 }, {timestamps: true});
 
-const newModel = mongoose.model("Chat 1", newSchemma);
-
-export default newModel;
+const dbModel = mongoose.model("Chat 1", dbSchemma);
+const connect = async () => {
+    return await DatabaseModel.connectDb();
+}
+connect();
+export default dbModel;
